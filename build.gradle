@@ -1,0 +1,35 @@
+plugins {
+    id 'org.spongepowered.plugin' version '0.8.1'
+    id "com.github.johnrengelman.shadow" version "2.0.1"
+}
+
+group = pluginGroup
+version = pluginVersion
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:6.0.0'
+    shadow "redis.clients:jedis:2.9.0"
+    shadow "org.apache.commons:commons-pool2:2.4.2"
+    shadow "org.mongodb:mongodb-driver:3.4.2"
+    shadow "com.amazonaws:aws-java-sdk-dynamodb:1.11.202"
+}
+
+sponge.plugin.id = pluginId
+
+shadowJar {
+
+    configurations = [project.configurations.shadow]
+    dependencies {
+        include dependency("redis.clients:jedis")
+        include dependency("org.apache.commons:commons-pool2")
+        include dependency("org.mongodb:mongodb-driver")
+        include dependency("org.mongodb:mongodb-driver-core")
+        include dependency("org.mongodb:bson")
+        include dependency("com.amazonaws:aws-java-sdk-dynamodb")
+    }
+
+    archiveName = "DatabaseCommons-" + version + ".jar"
+}
+
+build.dependsOn(shadowJar)
+jar.enabled = false
