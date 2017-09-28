@@ -25,7 +25,7 @@ shadowJar {
         include dependency("org.mongodb:mongodb-driver")
         include dependency("org.mongodb:mongodb-driver-core")
         include dependency("org.mongodb:bson")
-        include dependency("com.amazonaws:aws-java-sdk-dynamodb")
+        include dependency("com.amazonaws::")
     }
 
     archiveName = "DatabaseCommons-" + version + ".jar"
